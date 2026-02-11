@@ -6,7 +6,7 @@
 
 Born2beroot is a comprehensive system administration project that introduces virtualization, operating system installation, and server configuration fundamentals. This project involves creating a secure virtual machine with encrypted partitions using LVM, implementing strict security policies, configuring SSH and firewall services, and establishing robust password and sudo policies.
 
-Through this project, you'll gain hands-on experience with:
+Through this project, I gained hands-on experience with:
 - Virtual machine setup and management
 - Disk partitioning with LVM and encryption (LUKS)
 - User and group management
@@ -39,9 +39,9 @@ Through this project, you'll gain hands-on experience with:
 
 ### Prerequisites
 
-- **VirtualBox** (or UTM for Apple Silicon Macs)
-- **Debian 13 ISO image** (netinst recommended)
-- At least **12GB of disk space** for the virtual machine
+- **VirtualBox** 
+- **Debian 13 ISO image** 
+- **12GB of disk space** for the virtual machine
 - **1GB of RAM** allocated to the VM
 - Basic understanding of Linux commands
 
@@ -68,10 +68,8 @@ Add optical drive → Select debian-13.3.0-amd64-netinst.iso
 
 - Start the VM and boot from the ISO
 - Choose **Install** (not Graphical Install)
-- Language: English
-- Location: Your location
-- Keyboard: Your keyboard layout
-- **Hostname**: `fichmawi42` (format: your_login42)
+- Language, Location
+- **Hostname**: `fichmawi42` 
 - **Domain name**: Leave empty
 - **Root password**: Choose a strong password (remember it!)
 - **User account**: Create your main user (fichmawi)
@@ -119,9 +117,6 @@ This project doesn't require compilation. To run the virtual machine:
 # Start VirtualBox GUI
 VirtualBox &
 
-# Or start VM from command line (headless)
-VBoxManage startvm "Born2beroot" --type headless
-
 # Connect via SSH from host machine
 ssh fichmawi@localhost -p 4242
 ```
@@ -138,14 +133,12 @@ lsblk
 
 # Check sudo is installed
 sudo -V
-dpkg -l | grep sudo
 
 # Check UFW status
 sudo ufw status numbered
 
 # Check SSH status
 sudo systemctl status ssh
-ss -tulpn | grep 4242
 
 # Check the monitoring script automation
 sudo crontab -l
@@ -213,7 +206,8 @@ Defaults	requiretty
 sudo mkdir -p /var/log/sudo
 sudo touch /var/log/sudo/sudo.log
 ```
-
+## Detailed Configuration
+### Sudo Configuration
 ### Password Policy
 
 #### Configuration Files
@@ -314,7 +308,7 @@ PasswordAuthentication yes
 ```
 
 **Explanation**:
-- `Port 4242`: SSH listens on custom port 4242 (security through obscurity)
+- `Port 4242`: SSH listens on custom port 4242 
 - `PermitRootLogin no`: Disable direct root login for security
 - `PasswordAuthentication yes`: Allow password authentication
 
@@ -484,12 +478,6 @@ Add this line to run the script every 10 minutes:
 
 **Note**: This runs at every 10-minute mark (00, 10, 20, 30, 40, 50).
 
-For running 10 minutes after boot, use:
-
-```
-@reboot sleep 10m && /usr/local/bin/monitoring.sh
-*/10 * * * * /usr/local/bin/monitoring.sh
-```
 
 #### View Scheduled Jobs
 
