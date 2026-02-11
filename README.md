@@ -655,39 +655,3 @@ Debian was chosen for this project due to its legendary stability, beginner-frie
 * **UTM**: A lightweight virtualization tool optimized for macOS and Apple Silicon (M1/M2/M3), utilizing QEMU for high performance on ARM chips
 
 **Why VirtualBox:** Industry-standard virtualization platform with excellent cross-platform support and comprehensive documentation.
-
-### Design Choices
-
-**Partitioning:**
-- Separate `/boot` partition (unencrypted) for bootloader access
-- Encrypted LVM for security of all user data and system files
-- Separate `/home` partition for easier backup and system reinstallation
-
-**Security Policies:**
-- Password expiration every 30 days
-- Minimum password age of 2 days
-- Password complexity requirements (uppercase, lowercase, digits)
-- Sudo authentication limited to 3 attempts
-- Sudo commands logged for auditing
-
-**Services:**
-- SSH on custom port 4242 
-- Root login disabled via SSH
-- UFW firewall allowing only port 4242
-- AppArmor enabled for mandatory access control
-
-**User Management**
-
-#### 1. User Roles
-The system differentiates between different types of access to ensure a secure environment:
-* **Root Account**: The superuser account, used strictly for critical system administration.
-* **Primary User**: A non-privileged account created during installation for standard operations.
-
-#### 2. Group Organization
-Users are categorized into groups to manage permissions effectively:
-* **sudo Group**: Contains users authorized to perform administrative tasks with elevated privileges.
-* **user42 Group**: A specific group created for the project.
-
-#### 3. Account Management Strategy
-* **Privilege Separation**: Users do not have administrative rights by default.
-* **Auditability**: By using individual accounts instead of a shared root login, all system changes can be traced back to a specific user.
