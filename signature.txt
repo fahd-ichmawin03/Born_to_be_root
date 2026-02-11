@@ -1,1 +1,9 @@
-fcb94648d6982e01ab320a8b5b8e201716820429
+My signature : fcb94648d6982e01ab320a8b5b8e201716820429
+
+What is it?
+The signature is a cryptographic hash (unique fingerprint) of your .vdi file (virtual disk).
+Role
+Proves integrity - Verifies you haven't modified the VM after completing the project.
+
+# Same file → Same hash
+# Any change (even 1 bit) → Completely different hash
